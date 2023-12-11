@@ -1,49 +1,57 @@
-import { useEffect, useState } from "react";
-import Table from "react-bootstrap/Table";
-import { fetchAllUser } from "../services/userService";
 
-const TableUssers = (props) => {
-  const [listUsers, setListUsers] = useState([]);
+
+
+import { useEffect, useState } from 'react';
+import Table from 'react-bootstrap/Table';
+import {fetchAllUser} from "../services/userService"
+
+
+
+const TableUssers = (prop) => {
+
+  const  [listUser, setListUser] = useState([])
 
   useEffect(() => {
-    getUser();
-  }, []);
+    getAllUsers();
+  },[])
 
-  const getUser = async () => {
+  const getAllUsers = async() => {
     let res = await fetchAllUser();
-    if (res && res.data && res.data.data) {
-      setListUsers(res.data.data);
+    if(res && res.data) {
+      setListUser(res.data)
     }
-  };
-  console.log(listUsers);
+  }
+
   return (
-    <Table striped bordered hover>
+    <Table striped bordered hover >
       <thead>
         <tr>
           <th>ID</th>
           <th>Email</th>
           <th>First Name</th>
           <th>Last Name</th>
+          
         </tr>
       </thead>
-
-      
       <tbody>
-        {listUsers &&
-        listUsers.length > 0 &&
-        listUsers.map((item, index) => {
+        {listUser && listUser.length>0 &&
+        listUser.map((item, index) => {
           return (
-            <tr key={`user ${index}`}>
-              <td>{item.id}</td>
-              <td>{item.email}</td>
-              <td>{item.first_name}</td>
-              <td>{item.last_name}</td>
-            </tr>
-          );
-        })}
+            <tr key={`user-${index}`}>
+            <td>{item.id}</td>
+            <td>{item.email}</td>
+            <td>{item.first_name}</td>
+            <td>{item.last_name}</td>
+        </tr>
+          )
+        })
+        }
+        
+        
+        
       </tbody>
     </Table>
-  );
-};
+  )
+}
 
 export default TableUssers;
