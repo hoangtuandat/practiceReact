@@ -1,6 +1,11 @@
 body {
   div {
-    color:aliceblue;
+    .app-container{
+      .list-users{
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
   }
 
 }
